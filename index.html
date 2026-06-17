@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitHealth Pro | Avaliação Corporal</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <meta name="description"
+        content="Sistema profissional de avaliação corporal com IMC, TMB, hidratação, peso ideal, score de saúde e histórico.">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background"></div>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+            ❤️ FitHealth Pro
+        </div>
+
+        <nav>
+            <a href="#avaliacao">Avaliação</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#historico">Histórico</a>
+        </nav>
+
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Sua Saúde em um Só Lugar
+            </h1>
+
+            <p>
+                Descubra seu IMC, peso ideal, metabolismo, hidratação,
+                score de saúde e receba recomendações personalizadas.
+            </p>
+
+        </div>
+
+    </section>
+<section id="avaliacao" class="container">
+
+```
+<div class="avaliacao-layout">
+
+    <!-- FORMULÁRIO (ESQUERDA) -->
+    <div class="lado-formulario">
+
+        <div class="card principal-card">
+
+            <h2>📋 Avaliação Corporal Completa</h2>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Nome</label>
+                    <input type="text" id="nome">
+                </div>
+
+                <div class="input-group">
+                    <label>Idade</label>
+                    <input type="number" id="idade">
+                </div>
+
+                <div class="input-group">
+                    <label>Sexo</label>
+                    <select id="sexo">
+                        <option value="">Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Peso (kg)</label>
+                    <input type="number" id="peso">
+                </div>
+
+                <div class="input-group">
+                    <label>Altura (m)</label>
+                    <input type="number" id="altura" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label>Cintura (cm)</label>
+                    <input type="number" id="cintura">
+                </div>
+
+                <div class="input-group">
+                    <label>Nível de Atividade</label>
+                    <select id="atividade">
+                        <option value="">Selecione</option>
+                        <option value="1">Sedentário</option>
+                        <option value="2">Levemente Ativo</option>
+                        <option value="3">Moderadamente Ativo</option>
+                        <option value="4">Muito Ativo</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="btn-calcular" onclick="calcularTudo()">
+                🚀 Realizar Avaliação Completa
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AVATAR FIXO (DIREITA) -->
+    <div class="lado-avatar">
+
+        <div class="avatar-card">
+
+            <h2>🧍 Avatar Corporal</h2>
+
+            <div id="avatarHumano" class="avatar avatar-normal">
+
+                <div class="head"></div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+
+            </div>
+
+            <div id="statusCorpo">
+                Aguardando avaliação...
+            </div>
+
+            <div class="resumo-avatar">
+
+                <p>
+                    <strong>IMC:</strong>
+                    <span id="avatarImc">--</span>
+                </p>
+
+                <p>
+                    <strong>Classificação:</strong>
+                    <span id="avatarClassificacao">--</span>
+                </p>
+
+                <p>
+                    <strong>Score:</strong>
+                    <span id="avatarScore">--</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="container">
+
+        <h2 class="titulo-secao">
+            📊 Dashboard de Saúde
+        </h2>
+
+        <div class="cards-dashboard">
+
+            <div class="info-card">
+                <h3>IMC</h3>
+                <span id="imcValor">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>Classificação</h3>
+                <span id="classificacao">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>Peso Ideal</h3>
+                <span id="pesoIdeal">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>Meta de Peso</h3>
+                <span id="metaPeso">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>Água por Dia</h3>
+                <span id="aguaDia">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>TMB</h3>
+                <span id="tmb">--</span>
+            </div>
+
+            <div class="info-card">
+                <h3>Risco Abdominal</h3>
+                <span id="riscoCintura">--</span>
+            </div>
+
+            <div class="info-card destaque">
+                <h3>Score de Saúde</h3>
+                <span id="scoreSaude">--</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Barra de IMC -->
+    <section class="container">
+
+        <div class="card">
+
+            <h2>📈 Faixa de IMC</h2>
+
+            <div class="barra-imc">
+
+                <div id="ponteiro"></div>
+
+            </div>
+
+            <div id="faixaDescricao">
+                Aguardando cálculo...
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Gráfico -->
+    <section class="container">
+
+        <div class="card">
+
+            <h2>📉 Comparação de Peso</h2>
+
+            <canvas id="graficoPeso"></canvas>
+
+        </div>
+
+    </section>
+
+    <!-- Recomendações -->
+    <section class="container">
+
+        <div class="card">
+
+            <h2>🥗 Recomendações Nutricionais</h2>
+
+            <ul id="dicasNutricionais">
+
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- Exercícios -->
+    <section class="container">
+
+        <div class="card">
+
+            <h2>🏋️ Sugestões de Exercícios</h2>
+
+            <ul id="dicasExercicios">
+
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- Relatório -->
+    <section class="container">
+
+        <div class="card">
+
+            <h2>📝 Relatório Personalizado</h2>
+
+            <p id="relatorioCompleto">
+                Realize sua avaliação para visualizar o relatório.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Histórico -->
+    <section id="historico" class="container">
+
+        <div class="card">
+
+            <h2>📚 Histórico de Avaliações</h2>
+
+            <div id="historicoLista">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>FitHealth Pro</h3>
+
+        <p>
+            Plataforma de avaliação corporal e saúde.
+        </p>
+
+        <p>
+            IMC • TMB • Peso Ideal • Hidratação • Score de Saúde
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
